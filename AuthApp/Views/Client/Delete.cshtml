@@ -1,0 +1,69 @@
+﻿@model AuthApp.Models.Client
+
+@{
+    ViewData["Title"] = "Delete Client";
+}
+
+<link rel="stylesheet" href="~/css/Delete.css" asp-append-version="true" />
+
+<div class="delete-container">
+    <div class="delete-header">
+        <h2>Are you sure you want to delete this client?</h2>
+    </div>
+
+    <div class="delete-body">
+        <div class="alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            This action cannot be undone and will delete all associated repair records.
+        </div>
+
+        <div class="details-container">
+            <div class="detail-item">
+                <div class="detail-label">@Html.DisplayNameFor(model => model.Nom):</div>
+                <div class="detail-value">@Html.DisplayFor(model => model.Nom)</div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">@Html.DisplayNameFor(model => model.Tele):</div>
+                <div class="detail-value">@Html.DisplayFor(model => model.Tele)</div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Tracking Code:</div>
+                <div class="detail-value">@Html.DisplayFor(model => model.Code)</div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Total Repairs:</div>
+                <div class="detail-value">@ViewBag.TotalReparations</div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Active Repairs:</div>
+                <div class="detail-value">@ViewBag.TotalActiveRepairs</div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Image))
+            {
+                <div class="detail-item">
+                    <div class="detail-label">Client Photo:</div>
+                    <div class="detail-value">
+                        <img src="~/Images/@Model.Image" alt="Client photo" class="img-thumbnail" style="max-height: 200px;" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="delete-footer">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> Confirm Delete
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </form>
+    </div>
+</div>

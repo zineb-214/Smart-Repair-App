@@ -1,0 +1,100 @@
+﻿@model AuthApp.Models.DetailsReparation
+
+@{
+    ViewData["Title"] = "Create Details Reparation";
+}
+<link rel="stylesheet" href="~/css/Create.css" asp-append-version="true" />
+
+<div class="form-container">
+    <div class="form-header">
+        <h2>Create Details Reparation</h2>
+    </div>
+
+    <div class="form-body">
+        <form asp-action="Create">
+            <div class="mb-4">
+                <label asp-for="AppareilId" class="form-label">Appareil</label>
+                <select asp-for="AppareilId" class="form-select">
+                    <option value="">Select an Appareil</option>
+                    @foreach (var appareil in ViewBag.Appareils)
+                    {
+                        <option value="@appareil.Id">@appareil.Nom</option>
+                    }
+                </select>
+                <span asp-validation-for="AppareilId" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IMEI" class="control-label"></label>
+                        <input asp-for="IMEI" class="form-control" />
+                        <span asp-validation-for="IMEI" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="NumeroSerie" class="control-label"></label>
+                        <input asp-for="NumeroSerie" class="form-control" />
+                        <span asp-validation-for="NumeroSerie" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="PrixTotalReparation" class="control-label"></label>
+                        <input asp-for="PrixTotalReparation" class="form-control" />
+                        <span asp-validation-for="PrixTotalReparation" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="PrixAvance" class="control-label"></label>
+                        <input asp-for="PrixAvance" class="form-control" />
+                        <span asp-validation-for="PrixAvance" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DateFinEstime" class="control-label"></label>
+                        <input asp-for="DateFinEstime" class="form-control" type="date" />
+                        <span asp-validation-for="DateFinEstime" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Statut" class="form-label">Statut</label>
+                        <select asp-for="Statut" class="form-select">
+                            <option value="En Attente">En Attente</option>
+                            <option value="En Cours">En Cours</option>
+                            <option value="Terminé">Terminé</option>
+                        </select>
+                        <span asp-validation-for="Statut" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" asp-for="ReparationId" />
+            <div class="form-footer">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Create
+                </button>
+                <a href="@Url.Action("Index", "Reparation")" class="btn btn-outline-secondary">
+                    <i class="fas fa-times"></i> Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

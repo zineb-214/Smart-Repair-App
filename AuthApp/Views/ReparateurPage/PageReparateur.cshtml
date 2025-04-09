@@ -1,0 +1,219 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Réparateur | FixIT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --dark: #2c3e50;
+            --light-bg: #f5f7fa;
+            --card-bg: white;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+            width: 90vw;
+            height: 90vh;
+            max-width: 1200px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image en arrière-plan */
+        .image-card {
+            position: relative;
+            width: 100%;
+            height: 80%;
+            background: url('@Url.Content("~/images/image.png")') no-repeat center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Overlay semi-transparent */
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .content {
+            position: relative;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            z-index: 2;
+        }
+
+        .motivation-title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .motivation-text {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Statistiques */
+        .stats-section {
+            padding: 2rem;
+            text-align: center;
+            height: 35%;
+        }
+
+        .stats-title {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem; /* Ajuste l'espacement si nécessaire */
+        }
+
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+            .btn:hover {
+                background: #2980b9;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            }
+
+
+
+        .stat-card {
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: 8px;
+            width: 150px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .container {
+                grid-template-rows: 55% 45%;
+            }
+
+            .stats-grid {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .stat-card {
+                width: 45%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Image en arrière-plan avec contenu superposé -->
+        <div class="image-card">
+            <div class="overlay"></div>
+            <div class="content">
+                <h2 class="motivation-title">Votre expertise compte !</h2>
+                <p class="motivation-text">
+                    Bonjour <span class="highlight">@User.Identity.Name</span>, aujourd'hui vous avez <span class="highlight">@ViewBag.NombreReparations</span> réparation programmées.
+                    Votre travail minutieux redonne vie à des appareils et fait sourire nos clients.
+                </p>
+                <p class="motivation-text">
+                    <strong>"Un bon réparateur ne voit pas des appareils cassés, mais des solutions à créer."</strong>
+                </p>
+            </div>
+        </div>
+        <div class="button-container">
+            <a href="@Url.Action("Index", "Reparation")" class="btn">Commencer les réparations</a>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="stats-section">
+            <h3 class="stats-title">Vos performances</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">@ViewBag.ReparationsEnAttente</div>
+                    <div class="stat-label">Réparations en attente</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">@ViewBag.ReparationsEnCours</div>
+                    <div class="stat-label">Réparations en cours</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">@ViewBag.ReparationsTerminees</div>
+                    <div class="stat-label">Réparations terminées</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">@ViewBag.NombreReparations</div>
+                    <div class="stat-label">Total des réparations</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

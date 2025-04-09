@@ -1,0 +1,49 @@
+﻿@model AuthApp.Models.Reparation
+
+@{
+    ViewData["Title"] = "Edit Reparation";
+}
+
+<link rel="stylesheet" href="~/css/Edit.css" asp-append-version="true" />
+
+<div class="edit-container">
+    <div class="edit-header">
+        <h2><i class="fas fa-tools"></i> Edit Reparation</h2>
+        <span class="id-badge">ID: @Model.Id</span>
+    </div>
+
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="DateReception"><i class="fas fa-calendar-alt"></i> Reception Date</label>
+            <input asp-for="DateReception" class="form-control" type="date" />
+            <span asp-validation-for="DateReception" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IdClient"><i class="fas fa-user"></i> Client</label>
+            <select asp-for="IdClient" class="form-control" asp-items="ViewBag.Clients"></select>
+            <span asp-validation-for="IdClient" class="text-danger"></span>
+        </div>
+
+        <div class="form-footer">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </form>
+</div>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,60 @@
+﻿@model AuthApp.Models.Reparateur
+
+<link rel="stylesheet" href="~/css/style.css" />
+
+<div class="container mt-5">
+    <h2 class="mb-4">Create Reparateur</h2>
+
+    <form asp-action="Createe" method="post">
+        <!-- Display Store Name (it should be in TempData from the previous controller) -->
+        <h3 class="store-name-display">
+            <strong>Store Name:</strong> @TempData["StoreName"]
+        </h3>
+
+        <!-- Hidden field to store the MagasinId -->
+        <input asp-for="MagasinId" type="hidden" value="@TempData["MagasinId"]" />
+
+        <div class="mb-3">
+            <label asp-for="Nom" class="form-label">Reparateur Name</label>
+            <input asp-for="Nom" class="form-control" />
+            <span asp-validation-for="Nom" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="UserName" class="form-label">Username</label>
+            <input asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Password</label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Role</label>
+            <div>
+                <input type="radio" asp-for="Role" value="true" id="adminRole" />
+                <label for="adminRole" class="form-check-label">Admin</label>
+            </div>
+            <div>
+                <input type="radio" asp-for="Role" value="false" id="userRole" />
+                <label for="userRole" class="form-check-label">User</label>
+            </div>
+            <span asp-validation-for="Role" class="text-danger"></span>
+        </div>
+
+
+
+        <!-- Hidden field to store MagasinId -->
+        <input asp-for="MagasinId" type="hidden" value="@TempData["MagasinId"]" />
+        <div class="button-group">
+     <button type="submit" class="btn btn-primary">Next</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

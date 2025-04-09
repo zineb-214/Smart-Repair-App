@@ -1,0 +1,48 @@
+﻿@model AuthApp.Models.Paiement
+@{
+    ViewData["Title"] = "Paiement";
+}
+
+<link rel="stylesheet" href="~/css/style.css" />
+
+<div class="container mt-5">
+    <h2 class="mb-4">Paiement</h2>
+
+    <form asp-action="Createee" method="post">
+        <h3 class="store-name-display">
+            <strong>Nom du magasin:</strong> @TempData["StoreName"]
+        </h3>
+
+        <input asp-for="MagasinId" type="hidden" value="@TempData["MagasinId"]" />
+
+        <div class="mb-3">
+            <label asp-for="NumeroCarte" class="form-label">Numéro de carte</label>
+            <input asp-for="NumeroCarte" class="form-control" />
+            <span asp-validation-for="NumeroCarte" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CVV" class="form-label">CVV</label>
+            <input asp-for="CVV" class="form-control" />
+            <span asp-validation-for="CVV" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MethodePaiement" class="form-label">Méthode de paiement</label>
+            <select asp-for="MethodePaiement" class="form-control">
+                <option value="">-- Sélectionnez --</option>
+                <option value="Visa">Visa</option>
+                <option value="MasterCard">MasterCard</option>
+            </select>
+            <span asp-validation-for="MethodePaiement" class="text-danger"></span>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary">Payer</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

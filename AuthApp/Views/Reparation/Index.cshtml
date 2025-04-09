@@ -1,0 +1,116 @@
+﻿@model Tuple<IPagedList<AuthApp.Models.Reparation>, IPagedList<AuthApp.Models.DetailsReparation>>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "Reparations";
+    var reparations = Model.Item1;
+    var details = Model.Item2;
+    var selectedReparationId = ViewBag.SelectedReparationId as int?;
+}
+<head>
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<h2>@ViewData["Title"]</h2>
+
+<a href="@Url.Action("Create", "Reparation")" class="btn btn-primary mb-3">Ajouter une Réparation</a>
+
+<!-- Reparations Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Client</th>
+            <th>Reparateur</th>
+            <th>Date de Reception</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reparation in reparations)
+        {
+            <tr>
+                <td>@reparation.Id</td>
+                <td>@reparation.Client.Nom</td>
+                <td>@reparation.Reparateur.Nom</td>
+                <td>@reparation.DateReception.ToString("dd-MM-yyyy")</td>
+                <td>
+                    <a href="@Url.Action("Index", new { reparationsPage = reparations.PageNumber, selectedReparationId = reparation.Id })" class="btn btn-info">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a href="@Url.Action("Create", "DetailsReparation", new { reparationId = reparation.Id })" class="btn btn-success">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <a href="@Url.Action("Edit", "Reparation", new { id = reparation.Id })" class="btn btn-warning">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="@Url.Action("Delete", "Reparation", new { id = reparation.Id })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this reparation?');">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Reparations Pagination -->
+<div class="pagination">
+    @Html.PagedListPager(reparations, page => Url.Action("Index", new { reparationsPage = page, selectedReparationId = selectedReparationId }))
+</div>
+
+<!-- Details Table -->
+@if (selectedReparationId.HasValue)
+{
+    <h3>Reparation Details</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Detail ID</th>
+                <th>Appareil</th>
+                <th>IMEI</th>
+                <th>Numero Serie</th>
+                <th>Prix Total</th>
+                <th>Prix Avance</th>
+                <th>Prix Reste</th>
+                <th>Description</th>
+                <th>Date Fin Estime</th>
+                <th>Statut</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in details)
+            {
+                <tr>
+                    <td>@detail.Id</td>
+                    <td> @(detail.Appareil != null ? detail.Appareil.Nom : "<i>No Appareil</i>")</td>
+                    <td>@detail.IMEI</td>
+                    <td>@detail.NumeroSerie</td>
+                    <td>@detail.PrixTotalReparation</td>
+                    <td>@detail.PrixAvance</td>
+                    <td>@detail.PrixReste</td>
+                    <td>@detail.Description</td>
+                    <td>@detail.DateFinEstime.ToString("dd-MM-yyyy")</td>
+                    <td>@detail.Statut</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "DetailsReparation", new { id = detail.Id })" class="btn btn-warning">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="@Url.Action("Delete", "DetailsReparation", new { id = detail.Id })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this part of reparation?');">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        <a href="@Url.Action("Details","DetailsReparation", new { id = detail.Id })" class="btn btn-info">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Details Pagination -->
+    <div class="pagination">
+        @Html.PagedListPager(details, page => Url.Action("Index", new { reparationsPage = reparations.PageNumber, detailsPage = page, selectedReparationId = selectedReparationId }))
+    </div>
+}

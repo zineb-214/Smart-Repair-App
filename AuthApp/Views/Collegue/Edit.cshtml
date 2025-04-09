@@ -1,0 +1,48 @@
+﻿@model AuthApp.Models.Collegue
+
+@{
+    ViewData["Title"] = "Edit Colleague";
+}
+
+<link rel="stylesheet" href="~/css/Edit.css" asp-append-version="true" />
+
+<div class="edit-container">
+    <div class="edit-header">
+        <h2><i class="fas fa-user-edit"></i> Edit Colleague</h2>
+        <span class="id-badge">ID: @Model.Id</span>
+        <p class="text-muted">Reparateur: @ViewBag.ReparateurName</p>
+    </div>
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Nom"><i class="fas fa-user"></i> Name</label>
+            <input asp-for="Nom" class="form-control" />
+            <span asp-validation-for="Nom" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NumeroTelephone"><i class="fas fa-phone"></i> Phone Number</label>
+            <input asp-for="NumeroTelephone" class="form-control" />
+            <span asp-validation-for="NumeroTelephone" class="text-danger"></span>
+        </div>
+
+        <div class="form-footer">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

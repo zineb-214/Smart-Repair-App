@@ -1,0 +1,41 @@
+﻿@model IPagedList<AuthApp.Models.RecetteReparateur>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "Recettes des Réparateurs";
+}
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Réparateur</th>
+            <th>Total Réparations</th>
+            <th>Total Emprunts</th>
+            <th>Recette Totale</th>
+            <th>Taxe du Réparateur</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var recette in Model)
+        {
+            <tr>
+                <td>@recette.Date.ToString("dd-MM-yyyy")</td>
+                <td>@recette.Reparateur.Nom</td>
+                <td>@recette.TotalReparations.ToString("C2")</td>
+                <td>@recette.TotalEmprunts.ToString("C2")</td>
+                <td>@recette.RecetteTotale.ToString("C2")</td>
+                <td>@recette.TaxReparateur.ToString("C2")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

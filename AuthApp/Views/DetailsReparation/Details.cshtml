@@ -1,0 +1,85 @@
+﻿@model AuthApp.Models.DetailsReparation
+
+@{
+    ViewData["Title"] = "Repair Detail";
+}
+
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h3>Repair Detail #@Model.Id</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Device Information</h4>
+                <dl class="row">
+                    <dt class="col-sm-4">Device Type:</dt>
+                    <dd class="col-sm-8">@Model.Appareil?.Nom</dd>
+
+                    <dt class="col-sm-4">IMEI:</dt>
+                    <dd class="col-sm-8">@Model.IMEI</dd>
+
+                    <dt class="col-sm-4">Serial Number:</dt>
+                    <dd class="col-sm-8">@Model.NumeroSerie</dd>
+                </dl>
+            </div>
+
+            <div class="col-md-6">
+                <h4>Repair Information</h4>
+                <dl class="row">
+                    <dt class="col-sm-4">Repair ID:</dt>
+                    <dd class="col-sm-8">@Model.ReparationId</dd>
+
+                    <dt class="col-sm-4">Status:</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge @(Model.Statut == "Completed" ? "bg-success" :
+                                          Model.Statut == "In Progress" ? "bg-warning" : "bg-secondary")">
+                            @Model.Statut
+                        </span>
+                    </dd>
+
+                    <dt class="col-sm-4">Estimated Completion:</dt>
+                    <dd class="col-sm-8">@Model.DateFinEstime.ToString("dd-MM-yyyy")</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h4>Financial Details</h4>
+                <dl class="row">
+                    <dt class="col-sm-3">Total Repair Cost:</dt>
+                    <dd class="col-sm-3">@Model.PrixTotalReparation.ToString("C")</dd>
+
+                    <dt class="col-sm-3">Amount Paid:</dt>
+                    <dd class="col-sm-3">@Model.PrixAvance.ToString("C")</dd>
+
+                    <dt class="col-sm-3">Balance Due:</dt>
+                    <dd class="col-sm-3">@Model.PrixReste.ToString("C")</dd>
+
+                    <dt class="col-sm-3">Payment Status:</dt>
+                    <dd class="col-sm-3">
+                        <span class="badge @(ViewBag.PaymentStatus == "Paid in Full" ? "bg-success" :
+                                          ViewBag.PaymentStatus == "Unpaid" ? "bg-danger" : "bg-warning")">
+                            @ViewBag.PaymentStatus
+                        </span>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h4>Repair Description</h4>
+                <div class="border p-3">
+                    @Model.Description
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+        <a asp-action="Index" asp-controller="Reparation" class="btn btn-secondary">Back to Repairs</a>
+    </div>
+</div>

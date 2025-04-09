@@ -1,0 +1,50 @@
+﻿@model AuthApp.Models.Collegue
+
+@{
+    ViewData["Title"] = "Create Collegue";
+}
+
+<link rel="stylesheet" href="~/css/Create.css" asp-append-version="true" />
+<div class="form-container">
+    <div class="form-header">
+        <h2>Create Collegue</h2>
+  
+
+            <small>Assigned to: @ViewBag.ReparateurName</small>
+        </div>
+            <div class="form-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="ReparateurId" value="@ViewBag.ReparateurId" />
+
+                <div class="form-group mb-3">
+                    <label asp-for="Nom" class="control-label"></label>
+                    <input asp-for="Nom" class="form-control" />
+                    <span asp-validation-for="Nom" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="NumeroTelephone" class="control-label"></label>
+                    <input asp-for="NumeroTelephone" class="form-control" />
+                    <span asp-validation-for="NumeroTelephone" class="text-danger"></span>
+                </div>
+
+            <div class="form-footer">
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Create
+                </button>
+
+                <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+            </div>
+            </form>
+        </div>
+    </div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

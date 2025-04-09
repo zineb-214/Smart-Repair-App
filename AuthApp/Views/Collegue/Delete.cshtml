@@ -1,0 +1,54 @@
+﻿@model AuthApp.Models.Collegue
+
+@{
+    ViewData["Title"] = "Delete Colleague";
+}
+
+<link rel="stylesheet" href="~/css/Delete.css" asp-append-version="true" />
+
+<div class="delete-container">
+    <div class="delete-header">
+        <h2>Are you sure you want to delete this colleague?</h2>
+    </div>
+
+    <div class="delete-body">
+        <div class="alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            This action will permanently delete all associated loan records.
+        </div>
+
+        <div class="details-container">
+            <div class="detail-item">
+                <div class="detail-label">@Html.DisplayNameFor(model => model.Nom):</div>
+                <div class="detail-value">@Html.DisplayFor(model => model.Nom)</div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Phone Number:</div>
+                <div class="detail-value">@Html.DisplayFor(model => model.NumeroTelephone)</div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Total Loans:</div>
+                <div class="detail-value">@(Model.Emprunts?.Count ?? 0)</div>
+            </div>
+
+            <div class="detail-item">
+                <div class="detail-label">Total Amount:</div>
+                <div class="detail-value">@(Model.TotalEmprunt.ToString("C"))</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="delete-footer">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> Confirm Delete
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </form>
+    </div>
+</div>

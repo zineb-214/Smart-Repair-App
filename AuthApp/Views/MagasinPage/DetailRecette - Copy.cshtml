@@ -1,0 +1,27 @@
+﻿@model AuthApp.Models.RecetteMagasin
+
+
+
+<h2>Détails de la Recette</h2>
+
+<p><strong>Recette Totale:</strong> @Model.RecetteTotaleMagasin</p>
+<p><strong>Taxe Totale:</strong> @Model.TotalTax</p>
+
+<h3>Réparateurs associés</h3>
+@if (Model.RecettesReparateurs != null && Model.RecettesReparateurs.Any())
+{
+    <ul>
+        @foreach (var recetteReparateur in Model.RecettesReparateurs)
+        {
+            <li>
+                <strong>@recetteReparateur.Reparateur.Nom</strong>: @recetteReparateur.RecetteTotale €
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Aucun réparateur associé à cette recette.</p>
+}
+
+

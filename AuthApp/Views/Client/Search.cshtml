@@ -1,0 +1,80 @@
+﻿@model AuthApp.Models.Client
+
+@{
+    ViewData["Title"] = "Search Client by Code de Suivi";
+}
+
+<h2>Search Client by Code de Suivi</h2>
+
+<!-- Display any error messages -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<!-- Search form for entering Code de Suivi -->
+<form asp-action="Search" method="post">
+    <div class="form-group">
+        <label for="Code">Enter Code de Suivi</label>
+        <input type="number" id="Code" name="code" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (Model != null && Model.Reparations != null)
+{
+    <h3>Reparations for Client: @Model.Nom</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Reparation ID</th>
+                <th>Date Reception</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reparation in Model.Reparations)
+            {
+                <tr>
+                    <td>@reparation.Id</td>
+                    <td>@reparation.DateReception.ToShortDateString()</td>
+                    <td>
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Marque</th>
+                                    <th>IMEI</th>
+                                    <th>Numéro Série</th>
+                                    <th>Prix Total</th>
+                                    <th>Prix Avance</th>
+                                    <th>Prix Reste</th>
+                                    <th>Description</th>
+                                    <th>Date Fin Estimée</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var detail in reparation.DetailsReparations)
+                                {
+                                    <tr>
+                                        <td>@detail.Appareil.Nom</td>
+                                        <td>@detail.IMEI</td>
+                                        <td>@detail.NumeroSerie</td>
+                                        <td>@detail.PrixTotalReparation</td>
+                                        <td>@detail.PrixAvance</td>
+                                        <td>@detail.PrixReste</td>
+                                        <td>@detail.Description</td>
+                                        <td>@detail.DateFinEstime.ToShortDateString()</td>
+                                        <td>@detail.Statut</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

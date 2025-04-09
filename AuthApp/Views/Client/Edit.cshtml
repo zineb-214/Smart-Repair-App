@@ -1,0 +1,60 @@
+﻿@model AuthApp.Models.Client
+
+@{
+    ViewData["Title"] = "Edit Client";
+}
+
+<link rel="stylesheet" href="~/css/Edit.css" asp-append-version="true" />
+
+<div class="edit-container">
+    <div class="edit-header">
+        <h2><i class="fas fa-user-edit"></i> Edit Client</h2>
+        <span class="id-badge">ID: @Model.Id</span>
+    </div>
+
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Nom"><i class="fas fa-user"></i> Name</label>
+            <input asp-for="Nom" class="form-control" />
+            <span asp-validation-for="Nom" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Tele"><i class="fas fa-phone"></i> Phone</label>
+            <input asp-for="Tele" class="form-control" />
+            <span asp-validation-for="Tele" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Image"><i class="fas fa-image"></i> Image</label>
+            <input type="file" asp-for="Image" class="form-control" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Code"><i class="fas fa-barcode"></i> Code</label>
+            <input asp-for="Code" class="form-control" />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+
+        <input type="hidden" asp-for="ReparateurId" />
+
+        <div class="form-footer">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

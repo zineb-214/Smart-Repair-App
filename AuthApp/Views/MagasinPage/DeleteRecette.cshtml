@@ -1,0 +1,37 @@
+﻿@model AuthApp.Models.RecetteMagasin
+
+@{
+    ViewData["Title"] = "Confirmation de Suppression";
+}
+
+<h2>Confirmation de Suppression</h2>
+
+<div class="alert alert-warning">
+    <strong>Attention!</strong> Vous êtes sur le point de supprimer la recette du magasin <strong>@Model.NomMagasin</strong> datant du <strong>@Model.Date.ToString("dd/MM/yyyy")</strong>. Cette action est irréversible.
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Total Recettes</th>
+                <th>Total Taxe</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Date.ToString("dd/MM/yyyy")</td>
+                <td>@Model.RecetteTotaleMagasin €</td>
+                <td>@Model.TotalTax €</td>
+                <td class="text-center">
+                    <form method="post" action="@Url.Action("DeleteConfirmed", new { id = Model.Id })">
+                        <button type="submit" class="btn btn-danger">Confirmer la Suppression</button>
+                        <a href="@Url.Action("PageMagasin")" class="btn btn-secondary">Annuler</a>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Subscription";
+}
+
+<link rel="stylesheet" href="~/css/style.css" />
+
+<section class="subscription-container">
+    <div class="triangle"></div>
+
+    <!-- Title and pricing -->
+    <h1 class="title-pro">Pack Pro Reparation</h1>
+    <h2 class="price">250DH Per Month</h2>
+
+    <!-- Features list -->
+    <ul class="features">
+        <li>✔ All features</li>
+        <li>✔ Support VIP 24/7</li>
+        <li>✔ Unlimited Access</li>
+    </ul>
+
+    <!-- Navigation buttons (Back and Next) -->
+    <div class="button-group">
+       
+
+        <!-- Pass MagasinId as a query parameter -->
+        <a href="@Url.Action("Createee", "Paiement", new { magasinId = TempData["MagasinId"] })" class="btn btn-secondary">Next</a>
+    </div>
+</section>

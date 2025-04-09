@@ -1,0 +1,44 @@
+﻿@model IEnumerable<AuthApp.Models.RecetteMagasin>
+
+@if (Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Total Recettes</th>
+                <th>Total Taxes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Date.ToString("dd/MM/yyyy")</td>
+                    <td>@item.RecetteTotaleMagasin.ToString("C")</td>
+                    <td>@item.TotalTax.ToString("C")</td>
+                    <td>
+                        <!-- Lien vers les détails -->
+                        <a href="@Url.Action("Details", "MagasinPage", new { id = item.Id })" class="btn btn-info">
+                            <i class="fas fa-info-circle"></i> Détails
+                        </a>
+
+                        <!-- Bouton de suppression -->
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Supprimer
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        Aucune recette disponible pour le moment.
+    </div>
+}

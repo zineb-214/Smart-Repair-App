@@ -1,0 +1,104 @@
+﻿/* General styles */
+body {
+    background-color: #f0f8ff; /* Light blue background */
+    color: #003366; /* Dark blue text */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Full-width container to use more space */
+.container {
+    width: 95%; /* Use more of the screen */
+    max-width: 1400px; /* Keep it readable on large screens */
+    margin: 20px auto; /* Center the content */
+}
+
+/* Make the table fill more space */
+.table {
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .table th {
+        background-color: #007bff; /* Blue headers */
+        color: white;
+        padding: 12px;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .table td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+        font-size: 15px;
+    }
+
+/* Button styling */
+.btn {
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    color: white;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: black;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Center align the "No details available" row */
+.text-center {
+    text-align: center;
+}
+
+/* Increase table spacing */
+.table-container {
+    margin-top: 15px;
+}
+
+/* Adjust pagination to be more compact */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+    .pagination a {
+        padding: 8px 14px;
+        border: 1px solid #007bff;
+        color: #007bff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+        .pagination a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+    .pagination .active a {
+        background-color: #007bff;
+        color: white;
+    }
+
+/* Index.css */
+.content-wrapper {
+    flex-grow: 1;
+    width: 100%;
+}
+

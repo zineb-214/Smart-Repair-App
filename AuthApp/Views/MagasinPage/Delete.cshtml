@@ -1,0 +1,52 @@
+﻿@model AuthApp.Models.Reparateur
+
+@{
+    ViewData["Title"] = "Supprimer Réparateur";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            <h3>Êtes-vous sûr de vouloir supprimer ce réparateur ?</h3>
+            <div class="alert alert-warning">
+                <strong>Attention :</strong> Cette action est irréversible.
+            </div>
+
+            <dl class="row">
+                <dt class="col-sm-3">Nom:</dt>
+                <dd class="col-sm-9">@Model.Nom</dd>
+
+                <dt class="col-sm-3">Nom d'utilisateur:</dt>
+                <dd class="col-sm-9">@Model.UserName</dd>
+
+                <dt class="col-sm-3">Taxe:</dt>
+                <dd class="col-sm-9">@Model.TaxPer%</dd>
+
+                <dt class="col-sm-3">Rôle:</dt>
+                <dd class="col-sm-9">
+                    @if (Model.Role)
+                    {
+                        <span class="badge bg-success">Admin</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-primary">Réparateur</span>
+                    }
+                </dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="reparateurID" />
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Confirmer la suppression
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Annuler
+                </a>
+            </form>
+        </div>
+    </div>
+</div>

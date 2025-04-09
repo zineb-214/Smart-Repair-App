@@ -1,0 +1,58 @@
+﻿@model AuthApp.Models.Reparation
+
+@{
+    ViewData["Title"] = "Create Reparation";
+}
+<link rel="stylesheet" href="~/css/Create.css" asp-append-version="true" />
+<div class="form-container">
+    <div class="form-header">
+        <h2>Create Reparation</h2>
+    </div>
+
+    <div class="form-body">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="DateReception" class="control-label"></label>
+                <input asp-for="DateReception" class="form-control" type="date" id="dateReceptionInput" />
+                <span asp-validation-for="DateReception" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="IdClient" class="form-label">Client</label>
+                <select asp-for="IdClient" class="form-select" asp-items="@(ViewData["Clients"] as SelectList)" required>
+                    <option value="">Select a client</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a client.
+                </div>
+            </div>
+            <div class="mb-4">
+                <!-- Link to create a new client with a plus icon -->
+                <a href="@Url.Action("Create", "Client")" class="btn btn-link">
+                    <i class="fas fa-plus"></i> Add New Client
+                </a>
+            </div>
+
+
+            <input type="hidden" asp-for="IdReparateur" value="1" />
+
+            <div class="form-footer">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Create
+                </button>
+                <a href="@Url.Action("Index", "Reparation")" class="btn btn-outline-secondary">
+                    <i class="fas fa-times"></i> Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+        // Set today's date as default for the DateReception input field
+        document.getElementById('dateReceptionInput').value = new Date().toISOString().split('T')[0];
+    </script>
+}

@@ -1,0 +1,96 @@
+﻿@model AuthApp.Models.DetailsReparation
+
+@{
+    ViewData["Title"] = "Edit Details Reparation";
+}
+
+<link rel="stylesheet" href="~/css/Edit.css" asp-append-version="true" />
+
+<div class="edit-container">
+    <div class="edit-header">
+        <h2><i class="fas fa-tools"></i> Edit Repair Detail</h2>
+        <span class="id-badge">ID: @Model.Id</span>
+    </div>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="AppareilId"><i class="fas fa-mobile-alt"></i> Device</label>
+            <select asp-for="AppareilId" class="form-control select-control">
+                <option value="">Select an Appareil</option>
+                @foreach (var appareil in ViewBag.Appareils)
+                {
+                    <option value="@appareil.Id" selected="@(Model.AppareilId == appareil.Id ? "selected" : null)">
+                        @appareil.Nom
+                    </option>
+                }
+            </select>
+            <span asp-validation-for="AppareilId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IMEI"><i class="fas fa-barcode"></i> IMEI</label>
+            <input asp-for="IMEI" class="form-control" />
+            <span asp-validation-for="IMEI" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NumeroSerie"><i class="fas fa-hashtag"></i> Serial Number</label>
+            <input asp-for="NumeroSerie" class="form-control" />
+            <span asp-validation-for="NumeroSerie" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PrixTotalReparation"><i class="fas fa-euro-sign"></i> Total Price</label>
+            <input asp-for="PrixTotalReparation" class="form-control" />
+            <span asp-validation-for="PrixTotalReparation" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PrixAvance"><i class="fas fa-coins"></i> Advance Paid</label>
+            <input asp-for="PrixAvance" class="form-control" />
+            <span asp-validation-for="PrixAvance" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"><i class="fas fa-align-left"></i> Description</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DateFinEstime"><i class="fas fa-calendar-alt"></i> Estimated End Date</label>
+            <input asp-for="DateFinEstime" class="form-control" type="date" />
+            <span asp-validation-for="DateFinEstime" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Statut"><i class="fas fa-tasks"></i> Status</label>
+            <select asp-for="Statut" class="form-control select-control">
+                <option value="En Attente">En Attente</option>
+                <option value="En Cours">En Cours</option>
+                <option value="Terminé">Terminé</option>
+            </select>
+            <span asp-validation-for="Statut" class="text-danger"></span>
+        </div>
+
+        <input type="hidden" asp-for="ReparationId" />
+
+        <div class="form-footer">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save
+            </button>
+            <a href="@Url.Action("Index", "Reparation")" class="btn btn-outline-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

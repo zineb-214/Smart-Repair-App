@@ -1,0 +1,135 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    ViewData["Title"] = "SAZOA-SMART REPAIR";
+    Layout = "_Layout"; // Use your shared layout
+}
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+<!-- H E R O -->
+<section id="hero" class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-md-5">
+                <img src="~/images/iphone.png" class="img-fluid" alt="Demo image">
+            </div>
+            <div class="col-md-7 content-box hero-content">
+                <span>Smart Repair Solutions</span>
+                <h1>Digital Innovation and the <b>Future of Device Repair</b></h1>
+                <p>Boost your device performance with our professional repair services</p>
+                <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- M A R K E T I N G -->
+<section id="marketing" class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-5">
+                <div class="content-box">
+                    <span>Repair Tracking</span>
+                    <h2>Service Insights</h2>
+                    <p>Track your device repair status, get real-time updates and notifications about your service progress.</p>
+                    <a asp-controller="Client" asp-action="Search" class="btn btn-primary">Track Your Repair</a>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <img src="~/images/demo-image.png" class="img-fluid" alt="Demo image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- T E S T I M O N I A L S -->
+<section id="testimonials" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>What Our Customers Say</h2>
+            <p>Hear from customers who have experienced our exceptional repair services</p>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0">
+                                <img src="~/images/user1.jpg" class="rounded-circle" width="50" alt="User">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>John Smith <span class="text-warning">★★★★★</span></h5>
+                                <small>Business Owner</small>
+                            </div>
+                        </div>
+                        <p class="card-text">"My phone was repaired in less than 24 hours with perfect results. Highly recommend their services!"</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0">
+                                <img src="~/images/user2.jpg" class="rounded-circle" width="50" alt="User">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>Sarah Johnson <span class="text-warning">★★★★★</span></h5>
+                                <small>Graphic Designer</small>
+                            </div>
+                        </div>
+                        <p class="card-text">"Professional service with transparent pricing. My laptop works like new again!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- S E R V I C E S -->
+<section id="services" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Our Services</h2>
+            <p>Comprehensive repair solutions for all your devices</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-mobile-alt fa-3x mb-3 text-primary"></i>
+                        <h4>Phone Repairs</h4>
+                        <p>Screen replacements, battery changes, and more for all smartphone models</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-laptop fa-3x mb-3 text-primary"></i>
+                        <h4>Laptop Repairs</h4>
+                        <p>Hardware and software solutions for all laptop brands</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-tablet-alt fa-3x mb-3 text-primary"></i>
+                        <h4>Tablet Repairs</h4>
+                        <p>Fast and reliable tablet repair services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- C A L L  T O  A C T I O N -->
+<section id="cta" class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Do you want to join us?</h2>
+        <a asp-controller="Account" asp-action="Login" class="btn btn-light btn-lg">Get Started Now</a>
+    </div>
+</section>

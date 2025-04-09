@@ -1,0 +1,65 @@
+﻿@model AuthApp.Models.Magasin
+<link rel="stylesheet" href="~/css/style.css" />
+
+<div class="container mt-5">
+    <h2 class="mb-4">Create Magasin</h2>
+    <form asp-action="Create" method="post">
+        <div class="mb-3">
+            <label asp-for="Nom" class="form-label">Store Name</label>
+            <input asp-for="Nom" class="form-control" />
+            <span asp-validation-for="Nom" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="UserName" class="form-label">Username</label>
+            <input asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Password</label>
+            <input id="password" asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+      
+
+        <div class="mb-3">
+            <label asp-for="Adresse" class="form-label">Address</label>
+            <input asp-for="Adresse" class="form-control" />
+            <span asp-validation-for="Adresse" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Ville" class="form-label">City</label>
+            <input asp-for="Ville" class="form-control" />
+            <span asp-validation-for="Ville" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Patent" class="form-label">Patent Number</label>
+            <input asp-for="Patent" class="form-control" />
+            <span asp-validation-for="Patent" class="text-danger"></span>
+        </div>
+
+        <div class="button-group">
+            <a href="@Url.Action("Create", "Magasin")" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Password confirmation validation
+    document.getElementById('confirmPassword').addEventListener('input', function() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = this.value;
+        const errorMessage = document.getElementById('passwordError');
+
+        if (password !== confirmPassword) {
+            errorMessage.textContent = "Les mots de passe ne correspondent pas.";
+        } else {
+            errorMessage.textContent = ""; // Clear the error message if passwords match
+        }
+    });
+</script>

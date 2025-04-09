@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Accueil";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" type="text/css" href="~/css/Accuiel.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Sidebar for Dashboard -->
+        <div class="sidebar">
+            <header>Welcome, @ViewData["ReparateurName"]!</header>
+            <nav>
+                <a href="@Url.Action("Index", "Client")">Clients</a>
+                <a href="@Url.Action("Index", "Reparation")">Reparations</a>
+                <a href="@Url.Action("Index", "Collegue")">Collegues</a>
+                <a href="@Url.Action("Index", "RecetteReparateur")">Recettes Reparateur</a>
+            </nav>
+            <div class="dashboard-links">
+                <button onclick="window.location.href='@Url.Action("Index", "Client")'">Go to Clients</button>
+                <button onclick="window.location.href='@Url.Action("Index", "Reparation")'">Go to Reparations</button>
+                <button onclick="window.location.href='@Url.Action("Index", "Collegue")'">Go to Collegues</button>
+                <button onclick="window.location.href='@Url.Action("Index", "RecetteReparateur")'">Go to Recettes Reparateur</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <h2>Dashboard</h2>
+            <p>Click the links below to access your sections:</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Reparateur Dashboard</p>
+    </footer>
+
+</body>
+</html>

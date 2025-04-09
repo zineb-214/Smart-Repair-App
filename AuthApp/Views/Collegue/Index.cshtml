@@ -1,0 +1,86 @@
+﻿@model List<AuthApp.Models.Collegue>
+
+@{
+    ViewData["Title"] = "Collègues & Emprunts";
+}
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+<a href="@Url.Action("Create", "Collegue")" class="btn btn-primary mb-3">Ajouter un Collègue</a>
+<h2>Liste des Collègues</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Numéro de téléphone</th>
+            <th>Total Emprunts</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var collegue in Model)
+        {
+            <tr>
+                <td>@collegue.Nom</td>
+                <td>@collegue.NumeroTelephone</td>
+                <td>@collegue.TotalEmprunt</td>
+                <td>
+                    <button class="btn btn-primary" onclick="showEmprunts(@collegue.Id)">
+                        <i class="fa fa-eye"></i>
+                    </button>
+
+                    <a href="@Url.Action("Create", "Emprunt", new { collegueId = collegue.Id })" class="btn btn-success">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@collegue.Id" class="btn btn-success">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@collegue.Id" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Liste des Emprunts</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Montant</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="empruntsTable">
+        <tr><td colspan="3">Sélectionnez un collègue pour voir ses emprunts.</td></tr>
+    </tbody>
+</table>
+
+<script>
+    function showEmprunts(collegueId) {
+        fetch(`/Collegue/GetEmprunts?collegueId=${collegueId}`)
+            .then(response => response.json())
+            .then(data => {
+                let tableBody = document.getElementById("empruntsTable");
+                tableBody.innerHTML = "";
+                if (data.length === 0) {
+                    tableBody.innerHTML = "<tr><td colspan='3'>Aucun emprunt trouvé.</td></tr>";
+                } else {
+                    data.forEach(emprunt => {
+                        tableBody.innerHTML += `<tr>
+                                <td>${emprunt.typeEmprunt}</td>
+                                <td>${emprunt.montant}</td>
+                                <td>${new Date(emprunt.date).toLocaleDateString()}</td>
+                                
+                            </tr>`;
+                    });
+                }
+            });
+    }
+</script>
